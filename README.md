@@ -1,7 +1,7 @@
 # MIDI2CV
 Convert MIDI messages to control voltage signals for use with a modular synthesizer
 
-###
+###Motivation
 
 Today, most music keyboards and synthesizers uses [MIDI](https://www.midi.org/) (Musical Instrument Digital Interface), a digital communication protocal almost universally accepted in the electronic music industry. However, before MIDI's emergence in the 1980s, analog synthesizers often used _control voltage_ (CV) signals for control (surprisingly!) and communication.
 
