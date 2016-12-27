@@ -19,3 +19,17 @@ In retrospect, this was a great decision
 * I learned a lot more about MIDI and about the CV method it replaced.
 * I gained an appreciation for the level of complexity required to generate some very common synth sounds (like [this one](https://youtu.be/SwYN7mTi6HM)!). I also _really_ gained an appreciation for the complexity required for polyphony in synthesizers!
 * Designing and building this converter gave me an opportunity to apply what I'd learned in my coursework and improve my troubleshooting skills.
+
+###Let's Get Into the Details
+
+Sort of. Rather than try to explain the MIDI communication protocal myself, here are some other websites and people who've done a great job explaining it:
+
+* This [Instructable](http://www.instructables.com/id/What-is-MIDI/) gives a comprehensive and comprehensible overview of MIDI. The author also wrote an [Instructable](http://www.instructables.com/id/Send-and-Receive-MIDI-with-Arduino/) about using an Arduino to send and receive MIDI messages; this particular Instructable was an invaluable resource throughout my project.
+* This [blog post](http://www.notesandvolts.com/2015/02/midi-and-arduino-build-midi-input.html) also gives a clear description of the MIDI input circuit.
+
+Briefly, MIDI uses bytes to convey a wide array of musical information, such as
+* note On/Off (are you pressing a key?)
+* pitch (what key are you pressing?)
+* velocity (how hard are you pressing the key?)
+* pitchbend (most MIDI keyboards have a control wheel for bending a note up or down)
+* modulation (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
