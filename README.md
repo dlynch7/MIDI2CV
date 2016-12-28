@@ -28,8 +28,8 @@ Sort of. Rather than try to explain the MIDI communication protocal myself, here
 * This [blog post](http://www.notesandvolts.com/2015/02/midi-and-arduino-build-midi-input.html) also gives a clear description of the MIDI input circuit.
 
 Briefly, MIDI uses bytes to convey a wide array of musical information, such as
-* note On/Off (are you pressing a key?)
-* pitch (what key are you pressing?)
-* velocity (how hard are you pressing the key?)
-* pitchbend (most MIDI keyboards have a control wheel for bending a note up or down)
-* modulation (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
+* **note On/Off** (are you pressing a key?)
+* **pitch** (what key are you pressing?)
+* **velocity** (how hard are you pressing the key?)
+* **pitchbend** (most MIDI keyboards have a control wheel for bending a note up or down)
+* **modulation** (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
