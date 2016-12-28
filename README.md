@@ -74,6 +74,12 @@ Before this project, I never used a dedicated DAC, and because I initially felt 
 The Arduino's analogWrite() function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
 
 ![RC circuit](/images/lpf_1pole_circuit.png)
+
+Note: I might use "bandwidth frequency" and "cutoff frequency" interchangeably, because for low-pass filters, they mean the same thing.
+
+An RC circuit is a 1-pole filter, which means that above its cutoff frequency, the filter has a slope of -20 dB per decade (i.e. if the filter attenuates a 100 Hz input signal by 20 dB, it will attenuate a 1000 Hz input signal by 40 dB). The Bode plot below illustrates the frequency response of this circuit.
+
+![RC bode](/images/lpf_1pole.png)
 --------
 
 ![MIDI circuit](/images/midicircuit.gif)
