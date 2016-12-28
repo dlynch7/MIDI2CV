@@ -30,6 +30,7 @@ Given the last bullet point above, my converter could be represented like this:
 
 ![Block Diagram](/images/blockdiagram.png)
 
+-------
 
 ###Let's Get Into the Details
 
@@ -62,11 +63,17 @@ The beauty of CV is that these analog CV signals are interchangeable. This flexi
 ####Digital-to-Analog Converter (DAC) Options
 
 I considered two methods for converting the Arduino's digital output to analog CV signals, and I actually wound up using both methods.
+
 1. Dedicated DAC chip
-2. Pulse Width Modulation (PWM) + Low-pass filter (LPF).
+2. Pulse Width Modulation (PWM) + Low-Pass Filter (LPF).
 
 Before this project, I never used a dedicated DAC, and because I initially felt hesitant about that method, I decided to see if I could do all my digital-to-analog conversion using filtered PWM.
 
+#####Filtered PWM
+
+The Arduino's analogWrite() function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
+
+![RC circuit](/images/lpf_1pole_circuit.png)
 --------
 
 ![MIDI circuit](/images/midicircuit.gif)
