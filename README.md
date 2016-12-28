@@ -151,6 +151,7 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
   * Solving the equation above for time constant &tau; gives &tau; = 0.196 s.
   * Plugging this &tau; into equation 3 above gives a cutoff frequency of 5.11 rad/s or 0.813 Hz. That's pretty low!
   * Using the MATLAB script [lpf1p.m](/matlab/lpf1p.m), I examined the frequency response and 0-5V step response of this filter, for a PWM frequency of 490 Hz, both of which are plotted below. Using the MATLAB function [stepinfo()](https://www.mathworks.com/help/control/ref/stepinfo.html), I found the settling time of this filter to be about 0.76 seconds. Considering the input PWM frequency is 490 Hz, that's an unacceptably slow settling time. Even if I used pins 5 or 6 (980 Hz PWM instead of 490 Hz), the settling time would have been around 0.38 s, still way too slow.
+  
   ![1-Pole LPF Bode](/images/matlab_plots/lpf_1pole_bode.png)
   ![1-Pole LPF 0-5V Step](/images/matlab_plots/lpf_1pole_5V_step_response.png)
 
