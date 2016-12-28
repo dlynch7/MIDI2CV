@@ -44,6 +44,30 @@ Briefly, MIDI uses bytes to convey a wide array of musical information, such as
 * **velocity** (how hard are you pressing the key?)
 * **pitchbend** (most MIDI keyboards have a control wheel for bending a note up or down)
 * **modulation** (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
+* **sustain** (are you pressing down on a sustain pedal, like on a piano?)
+
+There are many, many more MIDI messages available, but these are some of the most common and are also the ones I use most often when playing.
+
+CV conveys the same information as MIDI but does it differently, using both analog and logic-level signals.
+* MIDI **note on/off** messages map to logic-level **GATE** and **TRIGGER** CV signals.
+* Pretty much every other MIDI message maps to an analog CV signal
+    * pitch
+    * velocity
+    * modulation
+The beauty of CV is that these analog CV signals are interchangeable. This flexibility opens more possibilities for sound design. Here are just a few examples:
+* velocity CV -> filter cutoff frequency (sound brightens with harder keypresses)
+* pitch CV -> oscillator mix (use pitch to blend between two different waveforms)
+* modulation -> low frequency oscillator (LFO) amplitude (LFOs are another signal generator that will also output CV signals and can modulate more aspects of your sound)
+
+####Digital-to-Analog Converter (DAC) Options
+
+I considered two methods for converting the Arduino's digital output to analog CV signals, and I actually wound up using both methods.
+1. Dedicated DAC chip
+2. Pulse Width Modulation (PWM) + Low-pass filter (LPF).
+
+Before this project, I never used a dedicated DAC, and because I initially felt hesitant about that method, I decided to see if I could do all my digital-to-analog conversion using filtered PWM.
+
+--------
 
 ![MIDI circuit](/images/midicircuit.gif)
 
