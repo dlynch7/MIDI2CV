@@ -8,7 +8,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 - [Motivation](#motivation)
 - [Plan](#plan)
 - [Details](#details)
-	- [Digital-to-Analog Converter (DAC) Options](#digital-to-analog-converter-(DAC)-options)
+	- [Digital-to-Analog Converter Options](#digital-to-analog-converter-options)
 		- [Filtered PWM](#filtered-pwm)
 - [Results](#results)
 - [Further Plans](#further-plans)
@@ -72,7 +72,7 @@ The beauty of CV is that these analog CV signals are interchangeable. This flexi
 * pitch CV -> oscillator mix (use pitch to blend between two different waveforms)
 * modulation -> low frequency oscillator (LFO) amplitude (LFOs are another signal generator that will also output CV signals and can modulate more aspects of your sound)
 
-####Digital-to-Analog Converter (DAC) Options
+####Digital-to-Analog Converter Options
 
 I considered two methods for converting the Arduino's digital output to analog CV signals, and I actually wound up using both methods.
 
