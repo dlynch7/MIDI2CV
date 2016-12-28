@@ -127,7 +127,7 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
 
   ![lpf_1pole_BW_freq](/images/equations/lpf_1pole_BW_freq.JPG)
 
-  Define RC as a time constant <dd>&tau;</dd>, and the equation above can be rewritten as
+  Define RC as a time constant &tau;, and the equation above can be rewritten as
 
   ![lpf_1pole_BW_tau](/images/equations/lpf_1pole_BW_tau.JPG)
 
