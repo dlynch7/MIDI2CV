@@ -15,7 +15,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 
 ---
 
-###Motivation
+##Motivation
 
 Today, most music keyboards and synthesizers use [MIDI](https://www.midi.org/) (Musical Instrument Digital Interface), a digital communication protocal almost universally accepted in the electronic music industry. However, before MIDI's emergence in the 1980s, analog synthesizers often used _control voltage_ (CV) signals for control (surprisingly!) and communication.
 
@@ -23,7 +23,7 @@ I recently started building a modular synthesizer, using the [Music From Outer S
 
 With a device to convert MIDI messages to CV signals, I could play my modular synth using any MIDI-capable keyboard or my computer. While using a keyboard to play the modular synth makes improvising and jamming easier and more fun, I'm especially excited about the possibilty of writing music on my computer and playing it back on the modular synth, because this will greatly expand my toolset for writing and recording music.
 
-###Plan
+##Plan
 
 This project is essentially a specialized digital-to-analog converter (DAC). While there are already many options for MIDI-to-CV conversion, I wanted to make my own converter. 
 
@@ -44,7 +44,7 @@ Given the last bullet point above, my converter could be represented like this:
 
 -------
 
-###Details
+##Details
 
 Sort of. Rather than try to explain the MIDI communication protocal myself, here are some other websites and people who've done a great job explaining it:
 
@@ -72,7 +72,7 @@ The beauty of CV is that these analog CV signals are interchangeable. This flexi
 * pitch CV -> oscillator mix (use pitch to blend between two different waveforms)
 * modulation -> low frequency oscillator (LFO) amplitude (LFOs are another signal generator that will also output CV signals and can modulate more aspects of your sound)
 
-####Digital-to-Analog Converter Options
+###Digital-to-Analog Converter Options
 
 I considered two methods for converting the Arduino's digital output to analog CV signals, and I actually wound up using both methods.
 
@@ -81,7 +81,7 @@ I considered two methods for converting the Arduino's digital output to analog C
 
 Before this project, I never used a dedicated DAC, and because I initially felt hesitant about that method, I decided to see if I could do all my digital-to-analog conversion using filtered PWM.
 
-#####Filtered PWM
+####Filtered PWM
 
 The Arduino's analogWrite() function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
 
@@ -116,8 +116,8 @@ The design procedure then is this:
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
 
 ---
-###Results
-###Further Plans
+##Results
+##Further Plans
 
 --------
 
