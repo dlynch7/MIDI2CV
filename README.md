@@ -20,6 +20,15 @@ In retrospect, this was a great decision
 * I gained an appreciation for the level of complexity required to generate some very common synth sounds (like [this one](https://youtu.be/SwYN7mTi6HM)!). I also _really_ gained an appreciation for the complexity required for polyphony in synthesizers!
 * Designing and building this converter gave me an opportunity to apply what I'd learned in my coursework and improve my troubleshooting skills.
 
+While there are [some](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY&VPW=1910&VPH=844) MIDI-to-CV converters out there that do the job without resorting to a microcontroller, I wanted to go the microcontroller route, for a few reasons:
+* it's easier to reprogram a uC than it is to rebuild a circuit
+* more documentation available
+* more room for error/experimentation
+* I already had an Arduino Uno r3 on hand
+
+Given the last bullet point above, my converter could be represented like this:
+
+
 ###Let's Get Into the Details
 
 Sort of. Rather than try to explain the MIDI communication protocal myself, here are some other websites and people who've done a great job explaining it:
@@ -33,3 +42,5 @@ Briefly, MIDI uses bytes to convey a wide array of musical information, such as
 * **velocity** (how hard are you pressing the key?)
 * **pitchbend** (most MIDI keyboards have a control wheel for bending a note up or down)
 * **modulation** (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
+
+![MIDI circuit](/images/midicircuit.gif)
