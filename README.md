@@ -3,21 +3,15 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 
 ---
 
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-- [Contents](#)
-	- [Motivation](#)
-	- [Plan](#)
-	- [Details](#)
-	- [Results](#)
-	- [Further Plans](#)
-	- [Motivation](#)
-	- [Plan](#)
-	- [Details](#)
-		- [Digital-to-Analog Converter (DAC) Options](#)
-			- [Filtered PWM](#)
-	- [Results](#)
-	- [Further Plans](#)
+##Contents
+- [Motivation](#motivation)
+- [Plan](#plan)
+- [Details](#details)
+	- [Digital-to-Analog Converter (DAC) Options](#digital-to-analog-converter-(DAC)-options)
+		- [Filtered PWM](#filtered-pwm)
+- [Results](#results)
+- [Further Plans](#further-plans)
 
 ---
 
