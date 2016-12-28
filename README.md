@@ -24,7 +24,7 @@ While there are [some](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY
 * it's easier to reprogram a uC than it is to rebuild a circuit
 * more documentation available
 * more room for error/experimentation
-* I already had an Arduino Uno r3 on hand
+* I already had an Arduino Uno on hand
 
 Given the last bullet point above, my converter could be represented like this:
 
@@ -44,5 +44,7 @@ Briefly, MIDI uses bytes to convey a wide array of musical information, such as
 * **velocity** (how hard are you pressing the key?)
 * **pitchbend** (most MIDI keyboards have a control wheel for bending a note up or down)
 * **modulation** (most MIDI keyboards also have a modulation wheel that can be assigned to modulate another parameter, such as vibrato, filter cutoff frequency, etc.)
+
+![equation](http://www.sciweavers.org/tex2img.php?eq=1%2Bsin%28mc%5E2%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
 
 ![MIDI circuit](/images/midicircuit.gif)
