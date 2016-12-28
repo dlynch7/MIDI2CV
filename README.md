@@ -4,11 +4,11 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 ---
 
 ## Contents
-###[Motivation](###Motivation)
-###[Plan](###Plan)
-###[Details](###Let's Get Into the Details)
-###[Results](###Results)
-###[Further Plans](###Further Plans)
+###[Motivation](#motivation)
+###[Plan](#plan)
+###[Details](#details)
+###[Results](#results)
+###[Further Plans](#further-plans)
 
 ---
 
@@ -41,7 +41,7 @@ Given the last bullet point above, my converter could be represented like this:
 
 -------
 
-###Let's Get Into the Details
+###Details
 
 Sort of. Rather than try to explain the MIDI communication protocal myself, here are some other websites and people who've done a great job explaining it:
 
