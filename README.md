@@ -37,7 +37,7 @@ In retrospect, this was a great decision
 * Designing and building this converter gave me an opportunity to apply what I'd learned in my coursework and improve my troubleshooting skills.
 
 While there are [some](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY&VPW=1910&VPH=844) MIDI-to-CV converters out there that do the job without resorting to a microcontroller, I wanted to go the microcontroller route, for a few reasons:
-* it's easier to reprogram a uC than it is to rebuild a circuit
+* it's easier to reprogram a &mu;C than it is to rebuild a circuit
 * more documentation available
 * more room for error/experimentation
 * I already had an Arduino Uno on hand
