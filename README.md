@@ -10,6 +10,10 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 - [Details](#details)
 	- [Digital-to-Analog Converter Options](#digital-to-analog-converter-options)
 		- [Filtered PWM](#filtered-pwm)
+			- [1-pole LPF math](#1-pole-lpf-math)
+			- [1-pole LPF for Pitch CV](#1-pole-lpf-for-pitch-cv)
+			- [Sallen-Key Filter](#sallen-key-filter)
+			- [2-pole Sallen-Key LPF for Pitch CV](#2-pole-sallen-key-lpf-for-pitch-cv)
 - [Results](#results)
 - [Further Plans](#further-plans)
 
@@ -110,26 +114,33 @@ For the RC circuit described above, the cutoff frequency is a function of the re
 The design procedure then is this:
 ```
 1. Determine a desirable ripple amplitude.
-2. Given the -20 dB/dec slope of the filter, calculate the cutoff frequency required to achieve the ripple amplitude.
+2. Given the filter's -20 dB/dec slope, calculate the cutoff frequency required to achieve the ripple amplitude.
 ```
 
-Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
-
+#####1-pole LPF math
   The transfer function for an RC LPF is
 
-  ![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)
+  ![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)		[1]
 
   The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
 
-  ![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)
+  ![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)		[2]
 
-  Solving for ω gives the cutoff frequency as a function of R and C:
+  Solving for &omega; gives the cutoff frequency as a function of R and C:
 
-  ![lpf_1pole_BW_freq](/images/equations/lpf_1pole_BW_freq.JPG)
+  ![lpf_1pole_BW_freq](/images/equations/lpf_1pole_BW_freq.JPG)		[3]
 
   Define RC as a time constant &tau;, and the equation above can be rewritten as
 
-  ![lpf_1pole_BW_tau](/images/equations/lpf_1pole_BW_tau.JPG)
+  ![lpf_1pole_BW_tau](/images/equations/lpf_1pole_BW_tau.JPG)		[4]
+
+Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
+
+#####1-pole LPF for Pitch CV
+
+#####Sallen-Key Filter
+
+#####2-pole Sallen-Key LPF for Pitch CV
 
 ---
 ##Results
