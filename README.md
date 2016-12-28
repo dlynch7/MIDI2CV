@@ -98,7 +98,7 @@ For the RC circuit described above, the cutoff frequency is a function of the re
 The design procedure then is this:
 ```
 1. Determine a desirable ripple amplitude.
-2. Given the -20 dB slope of the filter, calculate the filter cutoff frequency required to achieve the desired ripple amplitude.
+2. Given the -20 dB slope of the filter, calculate the cutoff frequency required to achieve the ripple amplitude.
 ```
 
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
