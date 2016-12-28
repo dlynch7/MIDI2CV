@@ -137,6 +137,20 @@ The design procedure then is this:
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
 
 #####1-pole LPF for Pitch CV
+  **Spoiler Alert!** This design doesn't work (as I'll explain below). That's why there are two section below labeled [Sallen-Key Filter](#sallen-key-filter) and [2-pole Sallen-Key LPF for Pitch CV](#2-pole-sallen-key-lpf-for-pitch-cv). Nevertheless, it's important to understand why this filter didn't work and why a more sophisticated filter was required.
+
+  Recall that step 1 of the design procedure required me to determine a desirable ripple amplitude. Since I was designing a filter to generate a pitch CV signal, this ripple amplitude corresponded to a variability in pitch, kind of like a vibrato, so I had to decide how much vibrato I was willing to tolerate (not much).
+ 
+  * I measured pitch variation in _cents_. A cent is 1/100th of a semitone (the difference in pitch between two adjacent keys on a piano, like C and C#).
+  * I decided to tolerate +/- 5 cents variation in pitch, or a magnitude of 10 cents.
+  * The voltage-controlled oscillator (VCO) of my synth is calibrated to 1V/octave, so two pitch CV signals 1V apart will make the VCO generate sounds 1 octave apart.
+  * There are 12 semitones in an octave, so 1V/octave is equivalent to 1/12V per semitone.
+  * Thus, 1 cent equals 0.8333 mV, and 10 cents equals 8.333 mV.
+  * ![pitch_var_magnitude](/images/equations/pitch_var_magnitude.JPG)
+  * Recall that for most pins on the Arduino, the PWM frequency is 490 Hz or 3079 rad/s, and the PWM signal switches between 0V and 5V.
+  * Solving the equation above for time constant &tau; gives &tau; = 0.196 s.
+  * Plugging this &tau; into equation 3 above gives a cutoff frequency of 5.11 rad/s or 0.813 Hz. That's pretty low!
+ 
 
 #####Sallen-Key Filter
 
@@ -149,12 +163,3 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
 --------
 
 ![MIDI circuit](/images/midicircuit.gif)
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-  <dd>&omega;</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
