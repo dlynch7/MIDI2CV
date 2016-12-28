@@ -75,11 +75,34 @@ The Arduino's analogWrite() function uses PWM to approximate a voltage between 0
 
 ![RC circuit](/images/lpf_1pole_circuit.png)
 
+A buffer is necessary to prevent whatever is connected to the filter's output from loading down the filter. This can be done with a voltage-follower, shown below with the original RC circuit.
+
+![Buffered RC circuit](/images/lpf_1pole_buffer.png)
+
 Note: I might use "bandwidth frequency" and "cutoff frequency" interchangeably, because for low-pass filters, they mean the same thing.
 
 An RC circuit is a 1-pole filter, which means that above its cutoff frequency, the filter has a slope of -20 dB per decade (i.e. if the filter attenuates a 100 Hz input signal by 20 dB, it will attenuate a 1000 Hz input signal by 40 dB). The Bode plot below illustrates the frequency response of this circuit.
 
 ![RC bode](/images/lpf_1pole.png)
+
+This Bode plot is also quite helpful for understanding my design process; the process applies for higher-order filters, too, and the only difference is that the Bode plot would look different (it would have a steeper slope).
+
+For clarity, I want to list the parameters relevant to using an RC circuit to filter a PWM signal from the Arduino.
+* Arduino PWM frequency
+* LPF cutoff frequency
+* PWM amplitude
+* Ripple amplitude (amplitude of filtered PWM signal)
+
+For the RC circuit described above, the cutoff frequency is a function of the resistor and capacitor values, R and C. Also, the frequency and amplitude of the Arduino's PWM signal are fixed: 490 Hz (980 Hz on pins 5 and 6) and 5V, respectively.
+
+The design procedure then is this:
+```
+1. Determine a desirable ripple amplitude.
+2. Given the -20 dB slope of the filter, calculate the filter cutoff frequency required to achieve the desired ripple amplitude.
+```
+
+Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
+
 --------
 
 ![MIDI circuit](/images/midicircuit.gif)
