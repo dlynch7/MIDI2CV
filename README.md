@@ -28,6 +28,8 @@ While there are [some](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY
 
 Given the last bullet point above, my converter could be represented like this:
 
+![Block Diagram](/images/blockdiagram.png)
+
 
 ###Let's Get Into the Details
 
