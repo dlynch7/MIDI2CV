@@ -110,10 +110,18 @@ For the RC circuit described above, the cutoff frequency is a function of the re
 The design procedure then is this:
 ```
 1. Determine a desirable ripple amplitude.
-2. Given the -20 dB slope of the filter, calculate the cutoff frequency required to achieve the ripple amplitude.
+2. Given the -20 dB/dec slope of the filter, calculate the cutoff frequency required to achieve the ripple amplitude.
 ```
 
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
+
+The transfer function for an RC LPF is
+
+![lpf_1pole_TF](/images/equations/lpf_1pole_TF.jpg)
+
+The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
+
+![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.jpg)
 
 ---
 ##Results
