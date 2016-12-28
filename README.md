@@ -4,11 +4,11 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 ---
 
 ## Contents
-###Motivation
-###Plan
-###Details
-###Results
-###Further Plans
+###[Motivation](###Motivation)
+###[Plan](###Plan)
+###[Details](###Let's Get Into the Details)
+###[Results](###Results)
+###[Further Plans](###Further Plans)
 
 ---
 
@@ -111,6 +111,10 @@ The design procedure then is this:
 ```
 
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
+
+---
+###Results
+###Further Plans
 
 --------
 
