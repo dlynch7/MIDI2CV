@@ -115,13 +115,21 @@ The design procedure then is this:
 
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
 
-The transfer function for an RC LPF is
+  The transfer function for an RC LPF is
 
-![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)
+  ![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)
 
-The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
+  The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
 
-![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)
+-  ![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)
+
+  Solving for <dd>&omega;</dd> gives the cutoff frequency as a function of R and C:
+
+-  ![lpf_1pole_BW_freq](/images/equations/lpf_1pole_BW_freq.JPG)
+
+  Define RC as a time constant <dd>&tau;</dd>, and the equation above can be rewritten as
+
+-  ![lpf_1pole_BW_tau](/images/equations/lpf_1pole_BW_tau.JPG)
 
 ---
 ##Results
