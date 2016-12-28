@@ -117,11 +117,11 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
 
 The transfer function for an RC LPF is
 
-![lpf_1pole_TF](/images/equations/lpf_1pole_TF.jpg)
+![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)
 
 The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
 
-![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.jpg)
+![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)
 
 ---
 ##Results
