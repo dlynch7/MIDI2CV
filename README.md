@@ -178,6 +178,17 @@ where
 
 ![sallen-key_LPF_comp2canon](/images/equations/sallen-key_LPF_comp2canon.JPG)		[8]
 
+For second-order systems, such as this filter, there is a quality factor _Q_ defined as
+
+![quality_factor](/images/equations/quality_factor.JPG)		[9]
+
+For a maximally sharp corner, Q = 1/2.
+To reduce the number of unknown variables, let C1 = C2 = C, R1 = R, and R2 = m*R. Then, equation 9 becomes
+
+![quality_factor_compvals](/images/equations/quality_factor_compvals.JPG)		[10]
+
+
+
 #####2-pole Sallen-Key LPF for Pitch CV
 
 ---
