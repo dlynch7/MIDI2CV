@@ -164,11 +164,19 @@ A [Sallen-Key filter](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology)
 
 The generic transfer function for a Sallen-Key filter is
 
-![sallen-key_TF_generic](/images/equations/sallen-key_TF_generic.JPG)
+![sallen-key_TF_generic](/images/equations/sallen-key_TF_generic.JPG)		[5]
 
 To make a Sallen-Key LPF,
 
-![sallen-key_LPF_Zs](sallen-key_LPF_Zs.JPG)
+![sallen-key_LPF_Zs](sallen-key_LPF_Zs.JPG)		[6]
+
+The generic transfer function above becomes
+
+![sallen-key_LPF_TF](sallen-key_LPF_TF.JPG)		[7]
+
+where
+
+![sallen-key_LPF_comp2canon](sallen-key_LPF_comp2canon.JPG)		[8]
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
