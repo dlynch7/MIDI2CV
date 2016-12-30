@@ -178,7 +178,7 @@ where
 
 ![sallen-key_LPF_comp2canon](/images/equations/sallen-key_LPF_comp2canon.JPG)		[8]
 
-Here, &omega;<sub>o</sub> is the natural frequency of the filter and &zeta; is the damping coefficient of the filter.
+Here, _&omega;<sub>o</sub>_ is the natural frequency of the filter and _&zeta;_ is the damping coefficient of the filter.
 
 For second-order systems, such as this filter, there is a quality factor _Q_ defined as
 
@@ -196,6 +196,8 @@ Solving for _m_ gives _m_ = 1, which means _R<sub>1</sub>_ = _R<sub>2</sub>_. Wi
 and the damping coefficient &zeta; becomes 1 (i.e. the filter is critically damped). Above the natural frequency, the filter has a slope of -40 dB/dec (twice as steep as a 1-pole LPF).
 
 #####2-pole Sallen-Key LPF for Pitch CV
+
+Designing a Sallen-Key LPF to smooth PWM requires
 
 ---
 ##Results
