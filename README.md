@@ -37,7 +37,7 @@ In retrospect, this was a great decision
 * Designing and building this converter gave me an opportunity to apply what I'd learned in my coursework and improve my troubleshooting skills.
 
 While there are [some](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY&VPW=1910&VPH=844) MIDI-to-CV converters out there that do the job without resorting to a microcontroller, I wanted to go the microcontroller route, for a few reasons:
-* it's easier to reprogram a &mu;C than it is to rebuild a circuit
+* it's easier to reprogram a _&mu;_C than it is to rebuild a circuit
 * more documentation available
 * more room for error/experimentation
 * I already had an Arduino Uno on hand
@@ -130,7 +130,7 @@ The design procedure then is this:
 
   ![lpf_1pole_BW_freq](/images/equations/lpf_1pole_BW_freq.JPG)		[3]
 
-  Define RC as a time constant &tau;, and the equation above can be rewritten as
+  Define RC as a time constant _&tau;_, and the equation above can be rewritten as
 
   ![lpf_1pole_BW_tau](/images/equations/lpf_1pole_BW_tau.JPG)		[4]
 
@@ -149,7 +149,7 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
   * ![pitch_var_magnitude](/images/equations/pitch_var_magnitude.JPG)
   * Recall that for most pins on the Arduino, the PWM frequency is 490 Hz or 3079 rad/s, and the PWM signal switches between 0V and 5V.
   * Solving the equation above for time constant &tau; gives &tau; = 0.196 s.
-  * Plugging this &tau; into equation 3 above gives a cutoff frequency of 5.11 rad/s or 0.813 Hz. That's pretty low!
+  * Plugging this _&tau;_ into equation 3 above gives a cutoff frequency of 5.11 rad/s or 0.813 Hz. That's pretty low!
   * Using the MATLAB script [lpf1p.m](/matlab/lpf1p.m), I examined the frequency response and 0-5V step response of this filter, for a PWM frequency of 490 Hz, both of which are plotted below. Using the MATLAB function [stepinfo()](https://www.mathworks.com/help/control/ref/stepinfo.html), I found the settling time of this filter to be about 0.76 seconds. Considering the input PWM frequency is 490 Hz, that's an unacceptably slow settling time. Even if I used pins 5 or 6 (980 Hz PWM instead of 490 Hz), the settling time would have been around 0.38 s, still way too slow.
 
   ![1-Pole LPF Bode](/images/matlab_plots/lpf_1pole_bode.png)
