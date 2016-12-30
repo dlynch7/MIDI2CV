@@ -158,10 +158,17 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
   If I was determined to use a 1-pole RC LPF, I would have to tolerate more pitch variability. Instead, I decided to try a 2-pole filter, which would have a -40 db/dec slope instead of the RC LPF's -20 db/dec slope.
 
 #####Sallen-Key Filter
-A simple way of making a 2-pole filter is to simply cascade two 1-pole filters. A [Sallen-Key filter](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology) is an active 2-pole filter that can be designed to work as a cascade of two 1-pole RC filters.
+A [Sallen-Key filter](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology) is an active 2-pole filter that can be designed to work as a cascade of two 1-pole RC filters.
 
 ![Sallen-Key LPF](/images/sallen-key_lpf.png)
 
+The generic transfer function for a Sallen-Key filter is
+
+![sallen-key_TF_generic](/images/equations/sallen-key_TF_generic.JPG)
+
+To make a Sallen-Key LPF,
+
+![sallen-key_LPF_Zs](sallen-key_LPF_Zs.JPG)
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
