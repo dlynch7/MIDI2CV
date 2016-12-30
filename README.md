@@ -178,11 +178,13 @@ where
 
 ![sallen-key_LPF_comp2canon](/images/equations/sallen-key_LPF_comp2canon.JPG)		[8]
 
+Here, &omega;<sub>o</sub> is the natural frequency of the filter and &zeta; is the damping coefficient of the filter.
+
 For second-order systems, such as this filter, there is a quality factor _Q_ defined as
 
 ![quality_factor](/images/equations/quality_factor.JPG)		[9]
 
-For a maximally sharp corner, Q = 1/2.
+For a maximally sharp corner, Q = 1/2. This makes the Sallen-Key LPF behave as two cascaded 1-pole LPFs.
 To reduce the number of unknown variables, let _C1_ = _C2_ = _C_, _R1_ = _R_, and _R2_ = _m*R_. Then, equation 9 becomes
 
 ![quality_factor_compvals](/images/equations/quality_factor_compvals.JPG)		[10]
@@ -191,7 +193,7 @@ Solving for _m_ gives _m_ = 1, which means _R1_ = _R2_. With _C1_ = _C2_ = _C_ a
 
 ![SK_natF_compvals](/images/equations/SK_natF_compvals.JPG)		[11]
 
-
+and the damping coefficient &zeta; becomes 1 (i.e. the filter is critically damped). Above the natural frequency, the filter has a slope of -40 dB/dec (twice as steep as a 1-pole LPF).
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
