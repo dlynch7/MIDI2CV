@@ -185,11 +185,11 @@ For second-order systems, such as this filter, there is a quality factor _Q_ def
 ![quality_factor](/images/equations/quality_factor.JPG)		[9]
 
 For a maximally sharp corner, Q = 1/2. This makes the Sallen-Key LPF behave as two cascaded 1-pole LPFs.
-To reduce the number of unknown variables, let _C1_ = _C2_ = _C_, _R1_ = _R_, and _R2_ = _m*R_. Then, equation 9 becomes
+To reduce the number of unknown variables, let _C<sub>1</sub>_ = _C<sub>2</sub>_ = _C_, _R<sub>1</sub>_ = _R_, and _R<sub>2</sub>_ = _m*R_. Then, equation 9 becomes
 
 ![quality_factor_compvals](/images/equations/quality_factor_compvals.JPG)		[10]
 
-Solving for _m_ gives _m_ = 1, which means _R1_ = _R2_. With _C1_ = _C2_ = _C_ and _R1_ = _R2_ = _R_, the filter's natural frequency becomes
+Solving for _m_ gives _m_ = 1, which means _R<sub>1</sub>_ = _R<sub>2</sub>_. With _C<sub>1</sub>_ = _C<sub>2</sub>_ = _C_ and _R<sub>1</sub>_ = _R<sub>2</sub>_ = _R_, the filter's natural frequency becomes
 
 ![SK_natF_compvals](/images/equations/SK_natF_compvals.JPG)		[11]
 
