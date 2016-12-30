@@ -113,7 +113,7 @@ For the RC circuit described above, the cutoff frequency is a function of the re
 
 The design procedure then is this:
 ```
-1. Determine a desirable ripple amplitude.
+1. Determine a desirable ripple magnitude.
 2. Given the filter's -20 dB/dec slope, calculate the cutoff frequency required to achieve the ripple amplitude.
 ```
 
@@ -193,11 +193,45 @@ Solving for _m_ gives _m_ = 1, which means _R<sub>1</sub>_ = _R<sub>2</sub>_. Wi
 
 ![SK_natF_compvals](/images/equations/SK_natF_compvals.JPG)		[11]
 
-and the damping coefficient &zeta; becomes 1 (i.e. the filter is critically damped). Above the natural frequency, the filter has a slope of -40 dB/dec (twice as steep as a 1-pole LPF).
+and the damping coefficient _&zeta;_ becomes 1 (i.e. the filter is critically damped). Above the natural frequency, the filter has a slope of -40 dB/dec (twice as steep as a 1-pole LPF).
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
 Designing a Sallen-Key LPF to smooth PWM requires finding a natural frequency _&omega;<sub>o</sub>_ that yields the desired ripple amplitude. Starting with the canonical form of the filter transfer function,
+
+![SK_TF_canonical](/images/equations/SK_TF_canonical.JPG)		[12]
+
+and evaluating the transfer function along the imaginary axis _s_ = _j%omega;_, the transfer function becomes
+
+![SK_TF_canonical_jw](/images/equations/SK_TF_canonical_jw.JPG)		[13]
+
+Recall that this filter is critically damped (_&zeta;_ = 1), so the equation above simplifies to 
+
+![SK_TF_canonical_jw_simp](/images/equations/SK_TF_canonical_jw_simp.JPG)		[14]
+
+The magnitude of the filter is 
+
+![SK_TF_mag](/images/equations/SK_TF_mag.JPG)		[15]
+
+and the magnitude of the filtered PWM signal, normalized by the 5V PWM amplitude, is
+
+![SK_TF_ripplemag](/images/equations/SK_TF_ripplemag.JPG)		[16]
+
+Solving the equation above for _&omega;<sub>o</sub>_ gives the filter's natural frequency as a function of the PWM frequency _&omega;<sub>PWM</sub>_ and desired ripple amplitude |G<sub>ripple</sub>|:
+
+![SK_natF_from_PWM](/images/equations/SK_natF_from_PWM.JPG)		[17]
+
+Recall from the design procedure for the 1-pole LPF that the desired normalized ripple magnitude is 0.001666. I decided to use the faster PWM available from pins 5 and 6 on the Arduino, so _&omega;<sub>PWM</sub>_ = 6158 rad/s. Plugging these values into the equation above gives
+
+![SK_natF_solved](/images/equations/SK_natF_solved.JPG)
+
+The last step of the design procedure is to choose values of _R_ and _C_ to achieve this natural frequency. With the components I had readily available, I chose _R_ = 39 k&Omega; and _C_ = 0.1 &mu;F, resulting in a natural frequency of 256 rad/s or 40.8 Hz.
+
+How well does this filter perform? I wrote a short MATLAB script ([lpf2p_calc.m](/matlab/lpf2p_calc.m)) to generate a Bode plot and a 0-5V step response as well as some characteristics of the step response. Both plots are below. The normalized magnitude of the filtered PWM signal is 0.0017 and the step response settling time is roughly 0.02 seconds.
+
+![lpf_2pole_bode_actual](/images/matlab_plots/lpf_2pole_bode_actual.png)
+
+![lpf_2pole_5V_step_response_actual](/images/matlab_plots/lpf_2pole_5V_step_response_actual.png)
 
 ---
 ##Results
