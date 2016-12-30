@@ -122,7 +122,7 @@ The design procedure then is this:
 
   ![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)		[1]
 
-  The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than it's DC level. For an RC LPF, this is simply -3 dB.
+  The bandwidth frequency or cutoff frequency of a filter is the frequency at which the filter's output is 3 dB less than its DC level. For an RC LPF, this is simply -3 dB.
 
   ![lpf_1pole_BW_TF](/images/equations/lpf_1pole_BW_TF.JPG)		[2]
 
@@ -151,11 +151,17 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
   * Solving the equation above for time constant &tau; gives &tau; = 0.196 s.
   * Plugging this &tau; into equation 3 above gives a cutoff frequency of 5.11 rad/s or 0.813 Hz. That's pretty low!
   * Using the MATLAB script [lpf1p.m](/matlab/lpf1p.m), I examined the frequency response and 0-5V step response of this filter, for a PWM frequency of 490 Hz, both of which are plotted below. Using the MATLAB function [stepinfo()](https://www.mathworks.com/help/control/ref/stepinfo.html), I found the settling time of this filter to be about 0.76 seconds. Considering the input PWM frequency is 490 Hz, that's an unacceptably slow settling time. Even if I used pins 5 or 6 (980 Hz PWM instead of 490 Hz), the settling time would have been around 0.38 s, still way too slow.
-  
+
   ![1-Pole LPF Bode](/images/matlab_plots/lpf_1pole_bode.png)
   ![1-Pole LPF 0-5V Step](/images/matlab_plots/lpf_1pole_5V_step_response.png)
 
+  If I was determined to use a 1-pole RC LPF, I would have to tolerate more pitch variability. Instead, I decided to try a 2-pole filter, which would have a -40 db/dec slope instead of the RC LPF's -20 db/dec slope.
+
 #####Sallen-Key Filter
+A simple way of making a 2-pole filter is to simply cascade two 1-pole filters. A [Sallen-Key filter](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology) is an active 2-pole filter that can be designed to work as a cascade of two 1-pole RC filters.
+
+![Sallen-Key LPF](/images/sallen-key_lpf.png)
+
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
