@@ -197,7 +197,7 @@ and the damping coefficient &zeta; becomes 1 (i.e. the filter is critically damp
 
 #####2-pole Sallen-Key LPF for Pitch CV
 
-Designing a Sallen-Key LPF to smooth PWM requires
+Designing a Sallen-Key LPF to smooth PWM requires finding a natural frequency _&omega;<sub>o</sub>_ that yields the desired ripple amplitude. Starting with the canonical form of the filter transfer function,
 
 ---
 ##Results
