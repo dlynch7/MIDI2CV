@@ -87,7 +87,7 @@ Before this project, I never used a dedicated DAC, and because I initially felt 
 
 ####Filtered PWM
 
-The Arduino's analogWrite() function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
+The Arduino's [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
 
 ![RC circuit](/images/lpf_1pole_circuit.png)
 
@@ -232,6 +232,21 @@ How well does this filter perform? I wrote a short MATLAB script ([lpf2p_calc.m]
 ![lpf_2pole_bode_actual](/images/matlab_plots/lpf_2pole_bode_actual.png)
 
 ![lpf_2pole_5V_step_response_actual](/images/matlab_plots/lpf_2pole_5V_step_response_actual.png)
+
+
+
+Although this filter did its job well, the whole filtered PWM solution still didn't work, because of limited PWM resolution. The Arduino function [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) supports 8-bit resolution. 
+
+MIDI notes span 10+ octaves, or 128 notes, so you'd think 256 different PWM duty cycles would be enough to generate pitch CV, but you'd be wrong! Look at this table to see why:
+
+| DAC Resolution | Number of Steps | Steps/semitone  | Acceptable? |
+| -------------- |:---------------:| ---------------:| -----------:|
+| 8-bit          | 256             | 2.1333          | No!         |
+| 12-bit         | 4096            | 34.1333         | Yes.        |
+| 16-bit         | 65536           | 546.1333        | Yes!        |
+
+#### Dedicated DAC
+The method
 
 ---
 ##Results
