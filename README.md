@@ -14,6 +14,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 			- [1-pole LPF for Pitch CV](#1-pole-lpf-for-pitch-cv)
 			- [Sallen-Key Filter](#sallen-key-filter)
 			- [2-pole Sallen-Key LPF for Pitch CV](#2-pole-sallen-key-lpf-for-pitch-cv)
+		- [Dedicated DAC](#dedicated-dac)
 - [Results](#results)
 - [Further Plans](#further-plans)
 
