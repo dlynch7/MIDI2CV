@@ -261,7 +261,7 @@ Although I initially planned to design my MIDI-to-CV converter to generate pitch
 With a 5-octave (5V) range in mind, I could calculate the values I'd need to write to the DAC:
 
 1. Since the DAC has 12-bit resolution, it can output 4096 different voltages between 0V and V<sub>cc</sub> (5V). So, one volt corresponds to 4096/5 = 819.2.
-2 An octave comprises 12 semitones, and with my 1V/octave VCO, a semitone corresponds to 1/12 V. So, one semitone corresponds to (4096/5)/12 = 68.2666. This means that to get C0 from the VCO, I'd write 0 to the DAC; to get C#0, I'd write 68; to get D0, I'd write 136, etc.
+2. An octave comprises 12 semitones, and with my 1V/octave VCO, a semitone corresponds to 1/12 V. So, one semitone corresponds to (4096/5)/12 = 68.2666. This means that to get C0 from the VCO, I'd write 0 to the DAC; to get C#0, I'd write 68; to get D0, I'd write 136, etc.
 
 I used [this Excel spreadsheet](/math/MIDI_note_number_to_DAC_input.xlsx) to find the value I'd need to write to the DAC, assuming ideal conditions (Vcc = 5.00000V, perfectly in-tune VCO, etc).
 
