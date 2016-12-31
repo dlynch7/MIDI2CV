@@ -253,6 +253,11 @@ With a non-integer number of steps per semitone, it's hard to get an in-tune pit
 
 I anticipated having to manually tune my DAC values, so I opted for a 12-bit DAC, the [MCP4725](https://www.sparkfun.com/products/12918) (as opposed to a 16-bit DAC; manually tuning DAC values for that would be a nightmare!). This DAC comes on a breakout board and there's an [Arduino library](https://github.com/adafruit/Adafruit_MCP4725) for it, so using it in my project was pretty straightforward. [This tutorial](https://learn.sparkfun.com/tutorials/mcp4725-digital-to-analog-converter-hookup-guide) is also pretty helpful for getting started.
 
+The tutorial comes with a simple sine wave generator. I uploaded that code to the Arduino and made a quick (and very shaky) video of the results:
+
+[![sine_wave](/images/video_links/sine_wave.JPG)](https://drive.google.com/file/d/0B5OA5X2encENVUV6MTRTQzJISjA/view?usp=sharing)
+
+
 Although I initially planned to design my MIDI-to-CV converter to generate pitch CV signals over a 10-octave range, at this point I decided to switch to a 5-octave range for 2 reasons:
 
 1. My synth's VCO has a pretty good operational range, more than 8 octaves, but my MIDI keyboards only have 3-, 4-, and 5-octave ranges. I can expand that range by using the Coarse and Fine tuning knobs on the VCO.
