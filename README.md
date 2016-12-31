@@ -54,6 +54,10 @@ Sort of. Rather than try to explain the MIDI communication protocal myself, here
 
 * This [Instructable](http://www.instructables.com/id/What-is-MIDI/) gives a comprehensive and comprehensible overview of MIDI. The author also wrote an [Instructable](http://www.instructables.com/id/Send-and-Receive-MIDI-with-Arduino/) about using an Arduino to send and receive MIDI messages; this particular Instructable was an invaluable resource throughout my project.
 * This [blog post](http://www.notesandvolts.com/2015/02/midi-and-arduino-build-midi-input.html) also gives a clear description of the MIDI input circuit.
+* Here is a [library](https://github.com/FortySevenEffects/arduino_midi_library) of code for Arduino to interface with MIDI. This is what I used to interface with my MIDI keyboard.
+* The schematic below shows the three circuits required by MIDI. Since my project only has a MIDI input, I only used the topmost circuit.
+
+![MIDI circuit](/images/midicircuit.gif)
 
 Briefly, MIDI uses bytes to convey a wide array of musical information, such as
 * **note On/Off** (are you pressing a key?)
@@ -233,9 +237,8 @@ How well does this filter perform? I wrote a short MATLAB script ([lpf2p_calc.m]
 
 ![lpf_2pole_5V_step_response_actual](/images/matlab_plots/lpf_2pole_5V_step_response_actual.png)
 
-
-
-Although this filter did its job well, the whole filtered PWM solution still didn't work, because of limited PWM resolution. The Arduino function [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) supports 8-bit resolution. 
+#### Dedicated DAC
+Although the Sallen-Key LPF did its job well, the whole filtered PWM solution still didn't work for generating _pitch CV_ (it works fine for velocity CV and modulation CVs), because of limited PWM resolution: the Arduino function [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) only has 8-bit resolution. This means the Arduino can use PWM to approximate 256 different values between 0V and 5V.
 
 MIDI notes span 10+ octaves, or 128 notes, so you'd think 256 different PWM duty cycles would be enough to generate pitch CV, but you'd be wrong! Look at this table to see why:
 
@@ -245,13 +248,12 @@ MIDI notes span 10+ octaves, or 128 notes, so you'd think 256 different PWM duty
 | 12-bit         | 4096            | 34.1333         | Yes.        |
 | 16-bit         | 65536           | 546.1333        | Yes!        |
 
-#### Dedicated DAC
-The method
+With a non-integer number of steps per semitone, it's hard to get an in-tune pitch out of the synthesizer. Ascending up the keyboard from C0, the lowest MIDI note, an 8-bit DAC (comparable to analogWrite() on the Arduino) will get out of tune much sooner than a 12-bit or 16-bit DAC.
+
+I anticipated having to manually tune my DAC values, so I opted for a 12-bit DAC, the [MCP4725](https://www.sparkfun.com/products/12918) (as opposed to a 16-bit DAC; manually tuning DAC values for that would be a nightmare!). This DAC comes on a breakout board and there's an [Arduino library](https://github.com/adafruit/Adafruit_MCP4725) for it, so using it in my project was pretty straightforward. [This tutorial](https://learn.sparkfun.com/tutorials/mcp4725-digital-to-analog-converter-hookup-guide) is also pretty helpful for getting started.
 
 ---
 ##Results
 ##Further Plans
 
 --------
-
-![MIDI circuit](/images/midicircuit.gif)
