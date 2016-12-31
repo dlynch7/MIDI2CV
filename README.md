@@ -298,9 +298,14 @@ Here are some **important things** I learned while implementing velocity control
 * The solution to this problem is to connect the op-amp's V- to a negative voltage instead of ground. The only negative supply I had was -12V from the synth power supply. By using -12V and +12V instead of 0V and +5V, I could also amplify the velocity CV to cover a wider range! I'm still troubleshooting a non-inverting op-amp circuit I designed for this purpose, and I'll update this page once I get it working.
 
 
-
----
-##Results
 ##Further Plans
+Above, I mentioned that I want to expand the range of my velocity CV and I have some troubleshooting to do on that front. I have some other features I want to implement:
+* **Pitchbend:** implementing pitchbend should be straightforward.
+  * I have to decide on a _pitchbend range_ (+/-2 semitones is common, although some cool sounds can be made with wider ranges like +/- 12 semitones). I would actually like to make that a parameter I could provide to the Arduino through some kind of interface, maybe up/down buttons or a scrollwheel and a hex LED.
+  * Once I have chosen a pitchbend range, I have to convert the MIDI pitchbend message to an increment/decrement and add that value to the value I'm writing to the DAC to generate the pitch CV. MIDI splits the pitchbend message into two parts, one for coarse resolution and one for fine resolution; I want to see how things sound if I just use coarse resolution before I attempt to use coarse + fine.
+* **Modulation CV:** this is almost identical to velocity CV, so it should be easy to implement.
+* **Gate and Trigger CV:** I have the Gate CV almost working, I just have to find what voltage the synth expects for a Gate HIGH condition and amplify the signal to reach that voltage. Getting the Trigger CV working will be a little trickier, because it's a momentary signal, but I suspect I can implement that entirely in the Arduino code, using a simple state machine.
+* **Sustain CV:** I've found that I use the sustain pedal a lot when I play, so I'd really like to get this working. I have to understand how the MIDI sustain message works first. If it doesn't alter the MIDI Note On/Off message, I can combine the sustain and note on/off messages to generate the Gate CV.
+* **PCB and Front Panel:** Since this whole project is for my modular synth, I'd like to build it as a module that I can add to the synth itself.
 
 --------
