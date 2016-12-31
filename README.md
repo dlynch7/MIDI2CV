@@ -57,9 +57,12 @@ Sort of. Rather than try to explain the MIDI communication protocal myself, here
 * This [Instructable](http://www.instructables.com/id/What-is-MIDI/) gives a comprehensive and comprehensible overview of MIDI. The author also wrote an [Instructable](http://www.instructables.com/id/Send-and-Receive-MIDI-with-Arduino/) about using an Arduino to send and receive MIDI messages; this particular Instructable was an invaluable resource throughout my project.
 * This [blog post](http://www.notesandvolts.com/2015/02/midi-and-arduino-build-midi-input.html) also gives a clear description of the MIDI input circuit.
 * Here is a [library](https://github.com/FortySevenEffects/arduino_midi_library) of code for Arduino to interface with MIDI. This is what I used to interface with my MIDI keyboard.
-* The schematic below shows the three circuits required by MIDI. Since my project only has a MIDI input, I only used the topmost circuit.
+
+The schematic below shows the three circuits required by MIDI. Since my project only has a MIDI input, I only used the topmost circuit.
 
 ![MIDI circuit](/images/midicircuit.gif)
+
+**Note:** MIDI transmits at a baud rate of 31250. The Arduino IDE doesn't support this baud rate, so if you want to print data for debugging purposes, you'll have to use an additional program to view serial data. I use [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). Just follow [this tutorial](http://acidotunismo.com/en/2013/10/arduino-uno-midi-in-debugging-with-putty-windows/).
 
 Briefly, MIDI uses bytes to convey a wide array of musical information, such as
 * **note On/Off** (are you pressing a key?)
