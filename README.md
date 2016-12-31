@@ -297,6 +297,8 @@ Here are some **important things** I learned while implementing velocity control
 * Although the Arduino can put out 0V, the TL-082 op-amp I used for my Sallen-Key LPF can't actually reach its rail voltages. As a result, when I connected the op-amp's V+ rail to the Arduino's 5V pin and the op-amp's V- rail to ground, the op-amp couldn't put out a signal as low as 0V!
 * The solution to this problem is to connect the op-amp's V- to a negative voltage instead of ground. The only negative supply I had was -12V from the synth power supply. By using -12V and +12V instead of 0V and +5V, I could also amplify the velocity CV to cover a wider range! I'm still troubleshooting a non-inverting op-amp circuit I designed for this purpose, and I'll update this page once I get it working.
 
+Here is my [Arduino program](/arduino/midi2pitchvelcv.ino), in its current state. I plan to update it according to my plans below:
+
 
 ##Further Plans
 Above, I mentioned that I want to expand the range of my velocity CV and I have some troubleshooting to do on that front. I have some other features I want to implement:
