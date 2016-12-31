@@ -253,7 +253,7 @@ With a non-integer number of steps per semitone, it's hard to get an in-tune pit
 
 I anticipated having to manually tune my DAC values, so I opted for a 12-bit DAC, the [MCP4725](https://www.sparkfun.com/products/12918) (as opposed to a 16-bit DAC; manually tuning DAC values for that would be a nightmare!). This DAC comes on a breakout board and there's an [Arduino library](https://github.com/adafruit/Adafruit_MCP4725) for it, so using it in my project was pretty straightforward. [This tutorial](https://learn.sparkfun.com/tutorials/mcp4725-digital-to-analog-converter-hookup-guide) is also pretty helpful for getting started.
 
-The tutorial comes with a simple sine wave generator. I uploaded that code to the Arduino and made a quick (and very shaky) video of the results:
+The tutorial comes with a simple sine wave generator. I uploaded that code to the Arduino and made a quick (and very shaky) video of the results. **Keep the volume low!**
 
 [![sine_wave](/images/video_links/sine_wave.JPG)](https://drive.google.com/file/d/0B5OA5X2encENVUV6MTRTQzJISjA/view?usp=sharing)
 
@@ -287,9 +287,11 @@ In that video, I rigged up a simple patch on the synth: I connected the output o
 
 [![pitch_and_vel_cv](/images/video_links/pitch_and_vel_cv.JPG)](https://drive.google.com/file/d/0B5OA5X2encENYnlNdWZTQ3JnVFU/view?usp=sharing)
 
+In that video, the Arduino is just generating logic-level velocity CV signals, so I'm manually adjusting the VCF's cutoff frequency to add some more musicallity. In the next video, I got the velocity CV fully working so I wouldn't have to tweak any knobs while playing.
+
 [![pitch_and_vel_cv2](/images/video_links/pitch_and_vel_cv2.JPG)](https://drive.google.com/file/d/0B5OA5X2encENS1duMlhIT1NpUWc/view?usp=sharing)
 
-My apologies for the shakiness of the second video above, and my apologies to Herbie Hancock for my rendition of "Chameleon"!
+My apologies for the shakiness of the last video, and my apologies to Herbie Hancock for my rendition of "Chameleon"!
 
 Here are some **important things** I learned while implementing velocity control:
 * Although the Arduino can put out 0V, the TL-082 op-amp I used for my Sallen-Key LPF can't actually reach its rail voltages. As a result, when I connected the op-amp's V+ rail to the Arduino's 5V pin and the op-amp's V- rail to ground, the op-amp couldn't put out a signal as low as 0V!
