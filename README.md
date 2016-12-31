@@ -3,6 +3,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 
 ---
 
+Jump to [Arduino Program](#arduino-program) if you want to see the current Arduino program. Otherwise, read on!
 
 ##Contents
 - [Motivation](#motivation)
@@ -15,7 +16,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 			- [Sallen-Key Filter](#sallen-key-filter)
 			- [2-pole Sallen-Key LPF for Pitch CV](#2-pole-sallen-key-lpf-for-pitch-cv)
 		- [Dedicated DAC](#dedicated-dac)
-- [Results](#results)
+- [Arduino Program](#arduino-program)
 - [Further Plans](#further-plans)
 
 ---
@@ -297,6 +298,7 @@ Here are some **important things** I learned while implementing velocity control
 * Although the Arduino can put out 0V, the TL-082 op-amp I used for my Sallen-Key LPF can't actually reach its rail voltages. As a result, when I connected the op-amp's V+ rail to the Arduino's 5V pin and the op-amp's V- rail to ground, the op-amp couldn't put out a signal as low as 0V!
 * The solution to this problem is to connect the op-amp's V- to a negative voltage instead of ground. The only negative supply I had was -12V from the synth power supply. By using -12V and +12V instead of 0V and +5V, I could also amplify the velocity CV to cover a wider range! I'm still troubleshooting a non-inverting op-amp circuit I designed for this purpose, and I'll update this page once I get it working.
 
+##Arduino Program
 Here is my [Arduino program](/arduino/midi2pitchvelcv.ino), in its current state. I plan to update it according to my plans below:
 
 
