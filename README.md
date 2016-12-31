@@ -289,6 +289,12 @@ In that video, I rigged up a simple patch on the synth: I connected the output o
 
 [![pitch_and_vel_cv2](/images/video_links/pitch_and_vel_cv2.JPG)](https://drive.google.com/file/d/0B5OA5X2encENS1duMlhIT1NpUWc/view?usp=sharing)
 
+My apologies for the shakiness of the second video above, and my apologies to Herbie Hancock for my rendition of "Chameleon"!
+
+Here are some **important things** I learned while implementing velocity control:
+* Although the Arduino can put out 0V, the TL-082 op-amp I used for my Sallen-Key LPF can't actually reach its rail voltages. As a result, when I connected the op-amp's V+ rail to the Arduino's 5V pin and the op-amp's V- rail to ground, the op-amp couldn't put out a signal as low as 0V!
+* The solution to this problem is to connect the op-amp's V- to a negative voltage instead of ground. The only negative supply I had was -12V from the synth power supply. By using -12V and +12V instead of 0V and +5V, I could also amplify the velocity CV to cover a wider range! I'm still troubleshooting a non-inverting op-amp circuit I designed for this purpose, and I'll update this page once I get it working.
+
 
 
 ---
