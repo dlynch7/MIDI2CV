@@ -239,7 +239,7 @@ How well does this filter perform? I wrote a short MATLAB script ([lpf2p_calc.m]
 ![lpf_2pole_5V_step_response_actual](/images/matlab_plots/lpf_2pole_5V_step_response_actual.png)
 
 #### Dedicated DAC
-Although the Sallen-Key LPF did its job well, the whole filtered PWM solution still didn't work for generating _pitch CV_ (it works fine for velocity CV and modulation CVs), because of limited PWM resolution: the Arduino function [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) only has 8-bit resolution. This means the Arduino can use PWM to approximate 256 different values between 0V and 5V.
+Although the Sallen-Key LPF did its job well, the whole filtered PWM solution still didn't work for generating _pitch CV_ (it works fine for velocity modulation CVs), because of limited PWM resolution: the Arduino function [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) only has 8-bit resolution. This means the Arduino can use PWM to approximate 256 different values between 0V and 5V.
 
 MIDI notes span 10+ octaves, or 128 notes, so you'd think 256 different PWM duty cycles would be enough to generate pitch CV, but you'd be wrong! Look at this table to see why:
 
@@ -252,6 +252,16 @@ MIDI notes span 10+ octaves, or 128 notes, so you'd think 256 different PWM duty
 With a non-integer number of steps per semitone, it's hard to get an in-tune pitch out of the synthesizer. Ascending up the keyboard from C0, the lowest MIDI note, an 8-bit DAC (comparable to analogWrite() on the Arduino) will get out of tune much sooner than a 12-bit or 16-bit DAC.
 
 I anticipated having to manually tune my DAC values, so I opted for a 12-bit DAC, the [MCP4725](https://www.sparkfun.com/products/12918) (as opposed to a 16-bit DAC; manually tuning DAC values for that would be a nightmare!). This DAC comes on a breakout board and there's an [Arduino library](https://github.com/adafruit/Adafruit_MCP4725) for it, so using it in my project was pretty straightforward. [This tutorial](https://learn.sparkfun.com/tutorials/mcp4725-digital-to-analog-converter-hookup-guide) is also pretty helpful for getting started.
+
+Although I initially planned to design my MIDI-to-CV converter to generate pitch CV signals over a 10-octave range, at this point I decided to switch to a 5-octave range for 2 reasons:
+
+1. My synth's VCO has a pretty good operational range, more than 8 octaves, but my MIDI keyboards only have 3-, 4-, and 5-octave ranges. I can expand that range by using the Coarse and Fine tuning knobs on the VCO.
+2. Since the Arduino's PWM has a range of 5V, generating CV signals of >5V requires amplification and connection to my synth's power supply (a +/- 12 V bipolar power supply) Although I wound up amplifying the PWM signal for velocity CV, I didn't want to connect too many things to the synth's power supply because I want to be able to power more modules in the future (more VCOs, more envelope generators, etc).
+
+With a 5-octave (5V) range in mind, I could calculate the values I'd need to write to the DAC:
+* Since the DAC has 12-bit resolution, it can output 4096 different voltages between 0V and V<sub>cc</sub> (5V). So, one volt corresponds to 4096/5 = 819.2.
+* An octave comprises 12 semitones, and with my 1V/octave VCO, a semitone corresponds to 1/12 V. So, one semitone corresponds to (4096/5)/12 = 68.2666. This means that to get C0 from the VCO, I'd write 0 to the DAC; to get C#0, I'd write 68; to get D0, I'd write 136, etc.
+* I used [this Excel spreadsheet](/math/MIDI_note_number_to_DAC_input.xlsx) to find the value I'd need to write to the DAC, assuming ideal conditions (Vcc = 5.00000V, perfectly in-tune VCO, etc).
 
 ---
 ##Results
