@@ -5,7 +5,7 @@ Convert MIDI messages to control voltage signals for use with a modular synthesi
 
 Jump to [Arduino Program](#arduino-program) if you want to see the current Arduino program. Otherwise, read on!
 
-##Contents
+## Contents
 - [Motivation](#motivation)
 - [Plan](#plan)
 - [Details](#details)
@@ -21,17 +21,17 @@ Jump to [Arduino Program](#arduino-program) if you want to see the current Ardui
 
 ---
 
-##Motivation
+## Motivation
 
-Today, most music keyboards and synthesizers use [MIDI](https://www.midi.org/) (Musical Instrument Digital Interface), a digital communication protocal almost universally accepted in the electronic music industry. However, before MIDI's emergence in the 1980s, analog synthesizers often used _control voltage_ (CV) signals for control (surprisingly!) and communication.
+Today, most music keyboards and synthesizers use [MIDI](https://www.midi.org/) (Musical Instrument Digital Interface), a digital communication protocol almost universally accepted in the electronic music industry. However, before MIDI's emergence in the 1980s, analog synthesizers often used _control voltage_ (CV) signals for control (surprisingly!) and communication.
 
-I recently started building a modular synthesizer, using the [Music From Outer Space](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY&VPW=1910&VPH=844) (MFOS) series of modules as a starting point, and I wanted to play it with my keyboards and the DAW (digital audio workstation) on my computer. 
+I recently started building a modular synthesizer, using the [Music From Outer Space](http://musicfromouterspace.com/index.php?MAINTAB=SYNTHDIY&VPW=1910&VPH=844) (MFOS) series of modules as a starting point, and I wanted to play it with my keyboards and the DAW (digital audio workstation) on my computer.
 
-With a device to convert MIDI messages to CV signals, I could play my modular synth using any MIDI-capable keyboard or my computer. While using a keyboard to play the modular synth makes improvising and jamming easier and more fun, I'm especially excited about the possibilty of writing music on my computer and playing it back on the modular synth, because this will greatly expand my toolset for writing and recording music.
+With a device to convert MIDI messages to CV signals, I could play my modular synth using any MIDI-capable keyboard or my computer. While using a keyboard to play the modular synth makes improvising and jamming easier and more fun, I'm especially excited about the possibility of writing music on my computer and playing it back on the modular synth, because this will greatly expand my toolset for writing and recording music.
 
-##Plan
+## Plan
 
-This project is essentially a specialized digital-to-analog converter (DAC). While there are already many options for MIDI-to-CV conversion, I wanted to make my own converter. 
+This project is essentially a specialized digital-to-analog converter (DAC). While there are already many options for MIDI-to-CV conversion, I wanted to make my own converter.
 
 In retrospect, this was a great decision
 * I learned a lot more about MIDI and about the CV method it replaced.
@@ -50,7 +50,7 @@ Given the last bullet point above, my converter could be represented like this:
 
 -------
 
-##Details
+## Details
 
 Sort of. Rather than try to explain the MIDI communication protocal myself, here are some other websites and people who've done a great job explaining it:
 
@@ -94,7 +94,7 @@ I considered two methods for converting the Arduino's digital output to analog C
 
 Before this project, I never used a dedicated DAC, and because I initially felt hesitant about that method, I decided to see if I could do all my digital-to-analog conversion using filtered PWM.
 
-####Filtered PWM
+#### Filtered PWM
 
 The Arduino's [analogWrite()](https://www.arduino.cc/en/Reference/AnalogWrite) function uses PWM to approximate a voltage between 0V and 5V. While some devices (LEDs, DC motors) can be controlled directly by PWM, the synthesizer is not one of those devices (unless you want to generate some interesting 'talking-robot' sounds). For PWM to interface nicely with my modular, it had to be low-pass filtered to 'smooth out' the signal. The simplest LPF is a resistor-capacitor (RC) circuit, as shown below, so I started there, with the expectation that a more sophisticated filter might be necessary.
 
@@ -126,7 +126,7 @@ The design procedure then is this:
 2. Given the filter's -20 dB/dec slope, calculate the cutoff frequency required to achieve the ripple amplitude.
 ```
 
-#####1-pole LPF math
+##### 1-pole LPF math
   The transfer function for an RC LPF is
 
   ![lpf_1pole_TF](/images/equations/lpf_1pole_TF.JPG)		[1]
@@ -145,11 +145,11 @@ The design procedure then is this:
 
 Below, I'll describe how I followed this procedure to design a filter to smooth out a CV signal which could be used for pitch control:
 
-#####1-pole LPF for Pitch CV
+##### 1-pole LPF for Pitch CV
   **Spoiler Alert!** This design doesn't work (as I'll explain below). That's why there are two section below labeled [Sallen-Key Filter](#sallen-key-filter) and [2-pole Sallen-Key LPF for Pitch CV](#2-pole-sallen-key-lpf-for-pitch-cv). Nevertheless, it's important to understand why this filter didn't work and why a more sophisticated filter was required.
 
   Recall that step 1 of the design procedure required me to determine a desirable ripple amplitude. Since I was designing a filter to generate a pitch CV signal, this ripple amplitude corresponded to a variability in pitch, kind of like a vibrato, so I had to decide how much vibrato I was willing to tolerate (not much).
- 
+
   * I measured pitch variation in _cents_. A cent is 1/100th of a semitone (the difference in pitch between two adjacent keys on a piano, like C and C#).
   * I decided to tolerate +/- 5 cents variation in pitch, or a magnitude of 10 cents.
   * The voltage-controlled oscillator (VCO) of my synth is calibrated to 1V/octave, so two pitch CV signals 1V apart will make the VCO generate sounds 1 octave apart.
@@ -166,7 +166,7 @@ Below, I'll describe how I followed this procedure to design a filter to smooth 
 
   If I was determined to use a 1-pole RC LPF, I would have to tolerate more pitch variability. Instead, I decided to try a 2-pole filter, which would have a -40 db/dec slope instead of the RC LPF's -20 db/dec slope.
 
-#####Sallen-Key Filter
+##### Sallen-Key Filter
 A [Sallen-Key filter](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology) is an active 2-pole filter that can be designed to work as a cascade of two 1-pole RC filters.
 
 ![Sallen-Key LPF](/images/sallen-key_lpf.png)
@@ -204,7 +204,7 @@ Solving for _m_ gives _m_ = 1, which means _R<sub>1</sub>_ = _R<sub>2</sub>_. Wi
 
 and the damping coefficient _&zeta;_ becomes 1 (i.e. the filter is critically damped). Above the natural frequency, the filter has a slope of -40 dB/dec (twice as steep as a 1-pole LPF).
 
-#####2-pole Sallen-Key LPF for Pitch CV
+##### 2-pole Sallen-Key LPF for Pitch CV
 
 Designing a Sallen-Key LPF to smooth PWM requires finding a natural frequency _&omega;<sub>o</sub>_ that yields the desired ripple amplitude. Starting with the canonical form of the filter transfer function,
 
@@ -214,11 +214,11 @@ and evaluating the transfer function along the imaginary axis _s_ = _j%omega;_, 
 
 ![SK_TF_canonical_jw](/images/equations/SK_TF_canonical_jw.JPG)		[13]
 
-Recall that this filter is critically damped (_&zeta;_ = 1), so the equation above simplifies to 
+Recall that this filter is critically damped (_&zeta;_ = 1), so the equation above simplifies to
 
 ![SK_TF_canonical_jw_simp](/images/equations/SK_TF_canonical_jw_simp.JPG)		[14]
 
-The magnitude of the filter is 
+The magnitude of the filter is
 
 ![SK_TF_mag](/images/equations/SK_TF_mag.JPG)		[15]
 
@@ -301,11 +301,11 @@ Here are some **important things** I learned while implementing velocity control
 * Although the Arduino can put out 0V, the TL-082 op-amp I used for my Sallen-Key LPF can't actually reach its rail voltages. As a result, when I connected the op-amp's V+ rail to the Arduino's 5V pin and the op-amp's V- rail to ground, the op-amp couldn't put out a signal as low as 0V!
 * The solution to this problem is to connect the op-amp's V- to a negative voltage instead of ground. The only negative supply I had was -12V from the synth power supply. By using -12V and +12V instead of 0V and +5V, I could also amplify the velocity CV to cover a wider range! I'm still troubleshooting a non-inverting op-amp circuit I designed for this purpose, and I'll update this page once I get it working.
 
-##Arduino Program
+## Arduino Program
 Here is my [Arduino program](/arduino/midi2pitchvelcv.ino), in its current state. I plan to update it according to my plans below:
 
 
-##Further Plans
+## Further Plans
 Above, I mentioned that I want to expand the range of my velocity CV and I have some troubleshooting to do on that front. I have some other features I want to implement:
 * **Pitchbend:** implementing pitchbend should be straightforward.
   * I have to decide on a _pitchbend range_ (+/-2 semitones is common, although some cool sounds can be made with wider ranges like +/- 12 semitones). I would actually like to make that a parameter I could provide to the Arduino through some kind of interface, such as hex LEDs and either up/down buttons or a scrollwheel.
